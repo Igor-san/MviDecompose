@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class DefaultEditContactComponent(
     componentContext: ComponentContext,
+    val onContactSaved: () -> Unit,
     private val contact: Contact) : EditContactComponent, ComponentContext by componentContext {
 
     private val repository = RepositoryImpl
@@ -40,6 +41,8 @@ class DefaultEditContactComponent(
     override fun onSaveContactClicked() {
         val(username, phone) = model.value
         editContactUseCase.invoke(contact.copy(username = username, phone= phone))
+        onContactSaved()
+
     }
     companion object {
 
