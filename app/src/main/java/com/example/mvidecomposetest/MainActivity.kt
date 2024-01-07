@@ -1,6 +1,7 @@
 package com.example.mvidecomposetest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
@@ -17,10 +18,19 @@ import com.example.mvidecomposetest.ui.content.RootContent
 import com.example.mvidecomposetest.ui.theme.MviDecomposeTestTheme
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("STORE_FACTORY", "CREATED MainActivity")
+
         super.onCreate(savedInstanceState)
+
+        // Create the root component before starting Compose
+        val root = DefaultRootComponent(componentContext = defaultComponentContext())
+
+
         setContent {
-            RootContent(component = DefaultRootComponent(defaultComponentContext()))
+            RootContent(component = root)
         }
     }
 }
